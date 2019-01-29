@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.mc.dev.moitor.mapper.AgentUserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.jtsec.mc.dev.moitor.pojo.model.AgentUserInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="user_desc" jdbcType="VARCHAR" property="userDesc"/>
+        <result column="cert_id" jdbcType="VARCHAR" property="certId"/>
+        <result column="ip_mac" jdbcType="VARCHAR" property="ipMac"/>
+        <result column="login_type" jdbcType="VARCHAR" property="loginType"/>
+        <result column="group_name" jdbcType="INTEGER" property="groupName"/>
+        <result column="filter_rule" jdbcType="INTEGER" property="filterRule"/>
+        <result column="audit_rule" jdbcType="INTEGER" property="auditRule"/>
+        <result column="flow_rule" jdbcType="INTEGER" property="flowRule"/>
+        <result column="quota_rule" jdbcType="INTEGER" property="quotaRule"/>
+        <result column="auto_flow_ctl" jdbcType="INTEGER" property="autoFlowCtl"/>
+        <result column="min_up" jdbcType="INTEGER" property="minUp"/>
+        <result column="min_down" jdbcType="INTEGER" property="minDown"/>
+        <result column="max_up" jdbcType="INTEGER" property="maxUp"/>
+        <result column="max_down" jdbcType="INTEGER" property="maxDown"/>
+        <result column="wan" jdbcType="INTEGER" property="wan"/>
+        <result column="connset" jdbcType="INTEGER" property="connset"/>
+        <result column="conn" jdbcType="INTEGER" property="conn"/>
+        <result column="con_tcp_conn" jdbcType="INTEGER" property="conTcpConn"/>
+        <result column="con_udp_conn" jdbcType="INTEGER" property="conUdpConn"/>
+        <result column="allow_time" jdbcType="INTEGER" property="allowTime"/>
+        <result column="allow_multi" jdbcType="INTEGER" property="allowMulti"/>
+        <result column="auto_bind_mac" jdbcType="VARCHAR" property="autoBindMac"/>
+        <result column="online" jdbcType="VARCHAR" property="online"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+        <result column="priority" jdbcType="VARCHAR" property="priority"/>
+        <result column="rate" jdbcType="INTEGER" property="rate"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_name, password, user_desc, cert_id, ip_mac, login_type, group_name, filter_rule,
+        audit_rule, flow_rule, quota_rule, auto_flow_ctl, min_up, min_down, max_up, max_down,
+        wan, connset, conn, con_tcp_conn, con_udp_conn, allow_time, allow_multi, auto_bind_mac,
+        online, login_time, priority, rate
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from agent_user_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from agent_user_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.jtsec.mc.dev.moitor.pojo.model.AgentUserInfo">
+        insert into agent_user_info (id, user_name, password,
+                                     user_desc, cert_id, ip_mac,
+                                     login_type, group_name, filter_rule,
+                                     audit_rule, flow_rule, quota_rule,
+                                     auto_flow_ctl, min_up, min_down,
+                                     max_up, max_down, wan,
+                                     connset, conn, con_tcp_conn,
+                                     con_udp_conn, allow_time, allow_multi,
+                                     auto_bind_mac, online, login_time,
+                                     priority, rate)
+        values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+                                        #{userDesc,jdbcType=VARCHAR}, #{certId,jdbcType=VARCHAR},
+                                        #{ipMac,jdbcType=VARCHAR},
+                                        #{loginType,jdbcType=VARCHAR}, #{groupName,jdbcType=INTEGER},
+                                        #{filterRule,jdbcType=INTEGER},
+                                        #{auditRule,jdbcType=INTEGER}, #{flowRule,jdbcType=INTEGER},
+            #{quotaRule,jdbcType=INTEGER},
+            #{autoFlowCtl,jdbcType=INTEGER}, #{minUp,jdbcType=INTEGER}, #{minDown,jdbcType=INTEGER},
+            #{maxUp,jdbcType=INTEGER}, #{maxDown,jdbcType=INTEGER}, #{wan,jdbcType=INTEGER},
+            #{connset,jdbcType=INTEGER}, #{conn,jdbcType=INTEGER}, #{conTcpConn,jdbcType=INTEGER},
+                #{conUdpConn,jdbcType=INTEGER}, #{allowTime,jdbcType=INTEGER}, #{allowMulti,jdbcType=INTEGER},
+                #{autoBindMac,jdbcType=VARCHAR}, #{online,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP},
+                #{priority,jdbcType=VARCHAR}, #{rate,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.jtsec.mc.dev.moitor.pojo.model.AgentUserInfo">
+        insert into agent_user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="userDesc != null">
+                user_desc,
+            </if>
+            <if test="certId != null">
+                cert_id,
+            </if>
+            <if test="ipMac != null">
+                ip_mac,
+            </if>
+            <if test="loginType != null">
+                login_type,
+            </if>
+            <if test="groupName != null">
+                group_name,
+            </if>
+            <if test="filterRule != null">
+                filter_rule,
+            </if>
+            <if test="auditRule != null">
+                audit_rule,
+            </if>
+            <if test="flowRule != null">
+                flow_rule,
+            </if>
+            <if test="quotaRule != null">
+                quota_rule,
+            </if>
+            <if test="autoFlowCtl != null">
+                auto_flow_ctl,
+            </if>
+            <if test="minUp != null">
+                min_up,
+            </if>
+            <if test="minDown != null">
+                min_down,
+            </if>
+            <if test="maxUp != null">
+                max_up,
+            </if>
+            <if test="maxDown != null">
+                max_down,
+            </if>
+            <if test="wan != null">
+                wan,
+            </if>
+            <if test="connset != null">
+                connset,
+            </if>
+            <if test="conn != null">
+                conn,
+            </if>
+            <if test="conTcpConn != null">
+                con_tcp_conn,
+            </if>
+            <if test="conUdpConn != null">
+                con_udp_conn,
+            </if>
+            <if test="allowTime != null">
+                allow_time,
+            </if>
+            <if test="allowMulti != null">
+                allow_multi,
+            </if>
+            <if test="autoBindMac != null">
+                auto_bind_mac,
+            </if>
+            <if test="online != null">
+                online,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="priority != null">
+                priority,
+            </if>
+            <if test="rate != null">
+                rate,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userDesc != null">
+                #{userDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="certId != null">
+                #{certId,jdbcType=VARCHAR},
+            </if>
+            <if test="ipMac != null">
+                #{ipMac,jdbcType=VARCHAR},
+            </if>
+            <if test="loginType != null">
+                #{loginType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                #{groupName,jdbcType=INTEGER},
+            </if>
+            <if test="filterRule != null">
+                #{filterRule,jdbcType=INTEGER},
+            </if>
+            <if test="auditRule != null">
+                #{auditRule,jdbcType=INTEGER},
+            </if>
+            <if test="flowRule != null">
+                #{flowRule,jdbcType=INTEGER},
+            </if>
+            <if test="quotaRule != null">
+                #{quotaRule,jdbcType=INTEGER},
+            </if>
+            <if test="autoFlowCtl != null">
+                #{autoFlowCtl,jdbcType=INTEGER},
+            </if>
+            <if test="minUp != null">
+                #{minUp,jdbcType=INTEGER},
+            </if>
+            <if test="minDown != null">
+                #{minDown,jdbcType=INTEGER},
+            </if>
+            <if test="maxUp != null">
+                #{maxUp,jdbcType=INTEGER},
+            </if>
+            <if test="maxDown != null">
+                #{maxDown,jdbcType=INTEGER},
+            </if>
+            <if test="wan != null">
+                #{wan,jdbcType=INTEGER},
+            </if>
+            <if test="connset != null">
+                #{connset,jdbcType=INTEGER},
+            </if>
+            <if test="conn != null">
+                #{conn,jdbcType=INTEGER},
+            </if>
+            <if test="conTcpConn != null">
+                #{conTcpConn,jdbcType=INTEGER},
+            </if>
+            <if test="conUdpConn != null">
+                #{conUdpConn,jdbcType=INTEGER},
+            </if>
+            <if test="allowTime != null">
+                #{allowTime,jdbcType=INTEGER},
+            </if>
+            <if test="allowMulti != null">
+                #{allowMulti,jdbcType=INTEGER},
+            </if>
+            <if test="autoBindMac != null">
+                #{autoBindMac,jdbcType=VARCHAR},
+            </if>
+            <if test="online != null">
+                #{online,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+                #{rate,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.mc.dev.moitor.pojo.model.AgentUserInfo">
+        update agent_user_info
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userDesc != null">
+                user_desc = #{userDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="certId != null">
+                cert_id = #{certId,jdbcType=VARCHAR},
+            </if>
+            <if test="ipMac != null">
+                ip_mac = #{ipMac,jdbcType=VARCHAR},
+            </if>
+            <if test="loginType != null">
+                login_type = #{loginType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=INTEGER},
+            </if>
+            <if test="filterRule != null">
+                filter_rule = #{filterRule,jdbcType=INTEGER},
+            </if>
+            <if test="auditRule != null">
+                audit_rule = #{auditRule,jdbcType=INTEGER},
+            </if>
+            <if test="flowRule != null">
+                flow_rule = #{flowRule,jdbcType=INTEGER},
+            </if>
+            <if test="quotaRule != null">
+                quota_rule = #{quotaRule,jdbcType=INTEGER},
+            </if>
+            <if test="autoFlowCtl != null">
+                auto_flow_ctl = #{autoFlowCtl,jdbcType=INTEGER},
+            </if>
+            <if test="minUp != null">
+                min_up = #{minUp,jdbcType=INTEGER},
+            </if>
+            <if test="minDown != null">
+                min_down = #{minDown,jdbcType=INTEGER},
+            </if>
+            <if test="maxUp != null">
+                max_up = #{maxUp,jdbcType=INTEGER},
+            </if>
+            <if test="maxDown != null">
+                max_down = #{maxDown,jdbcType=INTEGER},
+            </if>
+            <if test="wan != null">
+                wan = #{wan,jdbcType=INTEGER},
+            </if>
+            <if test="connset != null">
+                connset = #{connset,jdbcType=INTEGER},
+            </if>
+            <if test="conn != null">
+                conn = #{conn,jdbcType=INTEGER},
+            </if>
+            <if test="conTcpConn != null">
+                con_tcp_conn = #{conTcpConn,jdbcType=INTEGER},
+            </if>
+            <if test="conUdpConn != null">
+                con_udp_conn = #{conUdpConn,jdbcType=INTEGER},
+            </if>
+            <if test="allowTime != null">
+                allow_time = #{allowTime,jdbcType=INTEGER},
+            </if>
+            <if test="allowMulti != null">
+                allow_multi = #{allowMulti,jdbcType=INTEGER},
+            </if>
+            <if test="autoBindMac != null">
+                auto_bind_mac = #{autoBindMac,jdbcType=VARCHAR},
+            </if>
+            <if test="online != null">
+                online = #{online,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="priority != null">
+                priority = #{priority,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+                rate = #{rate,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.mc.dev.moitor.pojo.model.AgentUserInfo">
+        update agent_user_info
+        set user_name     = #{userName,jdbcType=VARCHAR},
+            password      = #{password,jdbcType=VARCHAR},
+            user_desc     = #{userDesc,jdbcType=VARCHAR},
+            cert_id       = #{certId,jdbcType=VARCHAR},
+            ip_mac        = #{ipMac,jdbcType=VARCHAR},
+            login_type    = #{loginType,jdbcType=VARCHAR},
+            group_name    = #{groupName,jdbcType=INTEGER},
+            filter_rule   = #{filterRule,jdbcType=INTEGER},
+            audit_rule    = #{auditRule,jdbcType=INTEGER},
+            flow_rule     = #{flowRule,jdbcType=INTEGER},
+            quota_rule    = #{quotaRule,jdbcType=INTEGER},
+            auto_flow_ctl = #{autoFlowCtl,jdbcType=INTEGER},
+            min_up        = #{minUp,jdbcType=INTEGER},
+            min_down      = #{minDown,jdbcType=INTEGER},
+            max_up        = #{maxUp,jdbcType=INTEGER},
+            max_down      = #{maxDown,jdbcType=INTEGER},
+            wan           = #{wan,jdbcType=INTEGER},
+            connset       = #{connset,jdbcType=INTEGER},
+            conn          = #{conn,jdbcType=INTEGER},
+            con_tcp_conn  = #{conTcpConn,jdbcType=INTEGER},
+            con_udp_conn  = #{conUdpConn,jdbcType=INTEGER},
+            allow_time    = #{allowTime,jdbcType=INTEGER},
+            allow_multi   = #{allowMulti,jdbcType=INTEGER},
+            auto_bind_mac = #{autoBindMac,jdbcType=VARCHAR},
+            online        = #{online,jdbcType=VARCHAR},
+            login_time    = #{loginTime,jdbcType=TIMESTAMP},
+            priority      = #{priority,jdbcType=VARCHAR},
+            rate          = #{rate,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="edit" parameterType="com.jtsec.mc.dev.moitor.pojo.model.AgentUserInfo">
+        update agent_user_info
+        <set>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="userDesc != null">
+                user_desc = #{userDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="certId != null">
+                cert_id = #{certId,jdbcType=VARCHAR},
+            </if>
+            <if test="ipMac != null">
+                ip_mac = #{ipMac,jdbcType=VARCHAR},
+            </if>
+            <if test="loginType != null">
+                login_type = #{loginType,jdbcType=VARCHAR},
+            </if>
+            <if test="groupName != null">
+                group_name = #{groupName,jdbcType=INTEGER},
+            </if>
+            <if test="filterRule != null">
+                filter_rule = #{filterRule,jdbcType=INTEGER},
+            </if>
+            <if test="auditRule != null">
+                audit_rule = #{auditRule,jdbcType=INTEGER},
+            </if>
+            <if test="flowRule != null">
+                flow_rule = #{flowRule,jdbcType=INTEGER},
+            </if>
+            <if test="quotaRule != null">
+                quota_rule = #{quotaRule,jdbcType=INTEGER},
+            </if>
+            <if test="autoFlowCtl != null">
+                auto_flow_ctl = #{autoFlowCtl,jdbcType=INTEGER},
+            </if>
+            <if test="minUp != null">
+                min_up = #{minUp,jdbcType=INTEGER},
+            </if>
+            <if test="minDown != null">
+                min_down = #{minDown,jdbcType=INTEGER},
+            </if>
+            <if test="maxUp != null">
+                max_up = #{maxUp,jdbcType=INTEGER},
+            </if>
+            <if test="maxDown != null">
+                max_down = #{maxDown,jdbcType=INTEGER},
+            </if>
+            <if test="wan != null">
+                wan = #{wan,jdbcType=INTEGER},
+            </if>
+            <if test="connset != null">
+                connset = #{connset,jdbcType=INTEGER},
+            </if>
+            <if test="conn != null">
+                conn = #{conn,jdbcType=INTEGER},
+            </if>
+            <if test="conTcpConn != null">
+                con_tcp_conn = #{conTcpConn,jdbcType=INTEGER},
+            </if>
+            <if test="conUdpConn != null">
+                con_udp_conn = #{conUdpConn,jdbcType=INTEGER},
+            </if>
+            <if test="allowTime != null">
+                allow_time = #{allowTime,jdbcType=INTEGER},
+            </if>
+            <if test="allowMulti != null">
+                allow_multi = #{allowMulti,jdbcType=INTEGER},
+            </if>
+            <if test="autoBindMac != null">
+                auto_bind_mac = #{autoBindMac,jdbcType=VARCHAR},
+            </if>
+            <if test="online != null">
+                online = #{online,jdbcType=VARCHAR},
+            </if>
+            <if test="loginTime != null">
+                login_time = #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="priority != null">
+                priority = #{priority,jdbcType=VARCHAR},
+            </if>
+            <if test="rate != null">
+                rate = #{rate,jdbcType=INTEGER},
+            </if>
+        </set>
+    </update>
+</mapper>

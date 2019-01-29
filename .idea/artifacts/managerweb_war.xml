@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="managerweb:war">
+    <output-path>$PROJECT_DIR$/../jtsec/jtsec-manager/manager-web/target</output-path>
+    <root id="archive" name="manager-web.war">
+      <element id="artifact" artifact-name="managerweb:war exploded" />
+    </root>
+  </artifact>
+</component>

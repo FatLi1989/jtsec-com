@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.manager.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.jtsec.manager.pojo.model.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="dept_id" jdbcType="INTEGER" property="deptId"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="login_date" jdbcType="TIMESTAMP" property="loginDate"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <resultMap id="UserResultMap" type="com.jtsec.manager.pojo.model.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="login_date" jdbcType="TIMESTAMP" property="loginDate"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <collection property="roles" ofType="com.jtsec.manager.pojo.model.Role">
+            <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+            <collection property="menus" ofType="com.jtsec.manager.pojo.model.Menu">
+                <id column="menu_id" jdbcType="INTEGER" property="menuId"/>
+                <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+                <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+                <result column="order_num" jdbcType="INTEGER" property="orderNum"/>
+                <result column="url" jdbcType="VARCHAR" property="url"/>
+                <result column="menu_type" jdbcType="CHAR" property="menuType"/>
+                <result column="visible" jdbcType="INTEGER" property="visible"/>
+                <result column="perms" jdbcType="VARCHAR" property="perms"/>
+                <result column="icon" jdbcType="VARCHAR" property="icon"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <resultMap id="SelectUserResultMap" type="com.jtsec.manager.pojo.model.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="login_name" jdbcType="VARCHAR" property="loginName"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="phonenumber" jdbcType="VARCHAR" property="phonenumber"/>
+        <result column="sex" jdbcType="CHAR" property="sex"/>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>
+        <result column="login_date" jdbcType="TIMESTAMP" property="loginDate"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <collection property="roles" ofType="com.jtsec.manager.pojo.model.Role">
+            <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+            <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id, dept_id, login_name, user_name, email, phonenumber, sex, avatar, password,
+        salt, status, login_ip, login_date, create_by, create_time, update_by, update_time,
+        remark
+    </sql>
+
+    <sql id="selectColumn">
+        u.user_id AS user_id,
+        u.login_name AS login_name,
+        u.user_name AS user_name,
+        u.`password` AS `password`,
+        u.email AS email,
+        u.phonenumber AS phonenumber,
+        u.sex AS sex,
+        u.salt AS salt,
+        u.login_ip AS login_ip,
+        u.`status` as `status`,
+        u.login_date AS login_date,
+        u.create_by AS create_by,
+        u.create_time AS create_time,
+        u.remark AS remark,
+        r.role_id AS role_id,
+        r.role_name AS role_name,
+        m.menu_id AS menu_id,
+        m.menu_name AS menu_name,
+        m.parent_id AS parent_id,
+        m.order_num AS order_num,
+        m.url AS url,
+        m.menu_type AS menu_type,
+        m.visible AS visible,
+        m.perms AS perms,
+        m.icon AS icon
+    </sql>
+
+    <sql id="selectUserColumn">
+        u.user_id AS user_id,
+        u.login_name AS login_name,
+        u.user_name AS user_name,
+        u.`password` AS `password`,
+        u.email AS email,
+        u.phonenumber AS phonenumber,
+        u.sex AS sex,
+        u.salt AS salt,
+        u.login_ip AS login_ip,
+        u.`status` as `status`,
+        u.login_date AS login_date,
+        u.create_by AS create_by,
+        u.create_time AS create_time,
+        u.remark AS remark,
+        r.role_id AS role_id,
+        r.role_name AS role_name
+    </sql>
+
+    <sql id="condition">
+        <where>
+            <if test="map.username != null and map.username != ''">
+                and u.login_name = #{map.username}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="userCondition">
+        <where>
+            <if test="map.loginName != null and map.loginName != ''">
+                and login_name like CONCAT ("%",#{map.loginName},"%")
+            </if>
+            <if test="map.phonenumber != null and map.phonenumber != ''">
+                and phonenumber like CONCAT ("%",#{map.phonenumber},"%")
+            </if>
+            <if test="map.status != null and map.status != ''">
+                and status = #{map.phonenumber}
+            </if>
+            <if test="map.createTimeBegin != null and map.createTimeBegin != '' and map.createTimeEnd != null and map.createTimeEnd != ''">
+                and create_time BETWEEN #{map.createTimeBegin} and #{map.createTimeEnd}
+            </if>
+        </where>
+    </sql>
+
+    <select id="queryUserbyVarible" resultMap="UserResultMap">
+        SELECT
+        <include refid="selectColumn"></include>
+        FROM
+        sys_user u
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT JOIN sys_role r ON ur.role_id = r.role_id
+        LEFT JOIN sys_role_menu rm ON r.role_id = rm.role_id
+        LEFT JOIN sys_menu m ON rm.menu_id = m.menu_id
+        <include refid="condition"></include>
+    </select>
+
+    <select id="selectUsers" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        <include refid="userCondition"></include>
+        order by status
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectUser" resultMap="SelectUserResultMap">
+        SELECT
+        <include refid="selectUserColumn"></include>
+        FROM
+        sys_user u
+        LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+        LEFT JOIN sys_role r ON ur.role_id = r.role_id
+        where u.user_id = #{id}
+    </select>
+
+    <select id="getUserByLoginName" resultType="com.jtsec.manager.pojo.model.User">
+        select
+            user_name as userName,
+            password,
+            salt
+        from sys_user
+        where login_name = #{loginName}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from sys_user
+        where user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="delBatch">
+        delete from sys_user
+        where user_id in (
+        <foreach collection="list" item="userIds" separator=",">
+            #{userIds}
+        </foreach>)
+    </delete>
+
+    <insert id="insert" parameterType="com.jtsec.manager.pojo.model.User" keyProperty="userId" useGeneratedKeys="true">
+        insert into sys_user (user_id, dept_id, login_name,
+                              user_name, email, phonenumber,
+                              sex, avatar, password,
+                              salt, status, login_ip,
+                              login_date, create_by, create_time,
+                              update_by, update_time, remark
+        )
+        values (#{userId,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR},
+                                            #{userName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
+                                            #{phonenumber,jdbcType=VARCHAR},
+                                            #{sex,jdbcType=CHAR}, #{avatar,jdbcType=VARCHAR},
+                                            #{password,jdbcType=VARCHAR},
+                                            #{salt,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+                #{loginIp,jdbcType=VARCHAR},
+                #{loginDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, now(),
+                #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.jtsec.manager.pojo.model.User" keyProperty="userId"
+            useGeneratedKeys="true">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="userName != null">
+                user_name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="phonenumber != null">
+                phonenumber,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="avatar != null">
+                avatar,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="loginIp != null">
+                login_ip,
+            </if>
+            <if test="loginDate != null">
+                login_date,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="deptId != null">
+                #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenumber != null">
+                #{phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=CHAR},
+            </if>
+            <if test="avatar != null">
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="loginIp != null">
+                #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null">
+                #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.manager.pojo.model.User">
+        update sys_user
+        <set>
+            <if test="deptId != null">
+                dept_id = #{deptId,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="userName != null">
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenumber != null">
+                phonenumber = #{phonenumber,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=CHAR},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                salt = #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="loginIp != null">
+                login_ip = #{loginIp,jdbcType=VARCHAR},
+            </if>
+            <if test="loginDate != null">
+                login_date = #{loginDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = now(),
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.manager.pojo.model.User">
+        update sys_user
+        set dept_id     = #{deptId,jdbcType=INTEGER},
+            login_name  = #{loginName,jdbcType=VARCHAR},
+            user_name   = #{userName,jdbcType=VARCHAR},
+            email       = #{email,jdbcType=VARCHAR},
+            phonenumber = #{phonenumber,jdbcType=VARCHAR},
+            sex         = #{sex,jdbcType=CHAR},
+            avatar      = #{avatar,jdbcType=VARCHAR},
+            password    = #{password,jdbcType=VARCHAR},
+            salt        = #{salt,jdbcType=VARCHAR},
+            status      = #{status,jdbcType=INTEGER},
+            login_ip    = #{loginIp,jdbcType=VARCHAR},
+            login_date  = #{loginDate,jdbcType=TIMESTAMP},
+            create_by   = #{createBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_by   = now(),
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            remark      = #{remark,jdbcType=VARCHAR}
+        where user_id = #{userId,jdbcType=INTEGER}
+    </update>
+</mapper>

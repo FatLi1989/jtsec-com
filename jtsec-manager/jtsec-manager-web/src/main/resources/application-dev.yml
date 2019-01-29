@@ -1,0 +1,5 @@
+#端口号及访问路径
+server:
+  port: 9527
+  servlet:
+    context-path: /jtsec

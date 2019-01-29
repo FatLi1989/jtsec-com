@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<xs:attribute name="value" ></xs:attribute>
+<xs:element name="devices">
+<xs:complexType>
+  <xs:sequence>
+  	<xs:element name="global" maxOccurs="1" minOccurs="1">
+  		<xs:complexType>
+  			<xs:sequence>
+  				<xs:element name="oid" maxOccurs="unbounded" minOccurs="0">
+					<xs:complexType>
+						<xs:attributeGroup ref="base_attr_group"></xs:attributeGroup>
+					</xs:complexType>  					
+  				</xs:element>
+  			</xs:sequence>
+  			<xs:attribute name="encoding" type="xs:string" use="optional" default="UTF-8"></xs:attribute>
+  			<xs:attribute name="descript" type="xs:string" use="optional"></xs:attribute>
+  		</xs:complexType>
+  	</xs:element>
+	<xs:element name="device" maxOccurs="unbounded">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="oid" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="oid" maxOccurs="unbounded" minOccurs="0">
+								<xs:complexType>
+									<xs:attributeGroup ref="base_attr_group"></xs:attributeGroup>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+						<xs:attributeGroup ref="base_attr_group"></xs:attributeGroup>
+						<xs:attribute name="handType" type="xs:string" use="required"></xs:attribute>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="type" type="xs:string" use="required"></xs:attribute>
+			<xs:attribute name="value" type="xs:string" use="required"></xs:attribute>
+			<xs:attribute name="descript" type="xs:string" use="optional"></xs:attribute>
+		</xs:complexType>
+	</xs:element>
+  </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+<xs:attributeGroup name="base_attr_group">
+	<xs:attribute name="value" type="xs:string" use="required"></xs:attribute>
+	<xs:attribute name="tableName" type="xs:string" use="optional" default=""></xs:attribute>
+	<xs:attribute name="descript" type="xs:string" use="optional"></xs:attribute>
+	<xs:attribute name="dataType" type="xs:string" use="optional"></xs:attribute>
+</xs:attributeGroup>
+</xs:schema>

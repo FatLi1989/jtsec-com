@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.nesscomputing:ness-syslog4j:0.9.47-NESS-3">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nesscomputing/ness-syslog4j/0.9.47-NESS-3/ness-syslog4j-0.9.47-NESS-3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nesscomputing/ness-syslog4j/0.9.47-NESS-3/ness-syslog4j-0.9.47-NESS-3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/nesscomputing/ness-syslog4j/0.9.47-NESS-3/ness-syslog4j-0.9.47-NESS-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

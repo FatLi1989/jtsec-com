@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.surpass:jtsec-utils:releases:1.0.2">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/surpass/jtsec-utils/1.0.2/jtsec-utils-1.0.2-releases.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/surpass/jtsec-utils/1.0.2/jtsec-utils-1.0.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/surpass/jtsec-utils/1.0.2/jtsec-utils-1.0.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

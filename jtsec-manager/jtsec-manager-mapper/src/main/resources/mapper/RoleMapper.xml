@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.manager.mapper.RoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.jtsec.manager.pojo.model.Role">
+        <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="role_key" jdbcType="VARCHAR" property="roleKey"/>
+        <result column="role_sort" jdbcType="INTEGER" property="roleSort"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <resultMap id="RoleMenuMap" type="com.jtsec.manager.pojo.model.Role">
+        <id column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="role_key" jdbcType="VARCHAR" property="roleKey"/>
+        <result column="role_sort" jdbcType="INTEGER" property="roleSort"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <collection property="menus" ofType="com.jtsec.manager.pojo.model.Menu">
+            <id column="menu_id" jdbcType="INTEGER" property="menuId"/>
+            <result column="menu_name" jdbcType="VARCHAR" property="menuName"/>
+            <result column="perms" jdbcType="VARCHAR" property="perms"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        role_id, role_name, role_key, role_sort, status, create_by, create_time, update_by,
+        update_time, remark
+    </sql>
+
+    <sql id="selectColumn">
+        r.role_id as role_id,
+        r.role_name as role_name,
+        r.role_key as role_key,
+        r.`status` as `status`,
+        r.create_time as create_time,
+        r.role_sort as role_sort,
+        r.remark as remark,
+        m.menu_id as menu_id,
+        m.menu_name as menu_name,
+        m.perms as perms
+    </sql>
+
+    <sql id="roleCondition">
+        <where>
+            <if test="map.roleName != null and map.roleName != ''">
+                and r.role_name like CONCAT ("%",#{map.roleName},"%")
+            </if>
+            <if test="map.roleKey != null and map.roleKey != ''">
+                and r.role_key like CONCAT ("%",#{map.roleKey},"%")
+            </if>
+            <if test="map.status != null and map.status != ''">
+                and r.status = #{map.status}
+            </if>
+            <if test="map.createTimeBegin != null and map.createTimeBegin != '' and map.createTimeEnd != null and map.createTimeEnd != ''">
+                and r.create_time BETWEEN #{map.createTimeBegin} and #{map.createTimeEnd}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectRoleByVarible" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_role r
+        <include refid="roleCondition"></include>
+        order by r.status
+    </select>
+
+    <select id="selectRoleById" resultMap="RoleMenuMap">
+        SELECT
+        <include refid="selectColumn"></include>
+        FROM
+        sys_role r
+        LEFT JOIN sys_role_menu rm ON rm.role_id = r.role_id
+        LEFT JOIN sys_menu m ON m.menu_id = rm.menu_id
+        where r.role_id = #{id}
+    </select>
+
+    <select id="selectRolesByUserId" resultType="com.jtsec.manager.pojo.model.Role">
+        SELECT
+            r.role_id   as roleId,
+            r.role_name as roleName,
+            r.role_key  as roleKey
+        FROM sys_user u
+            LEFT JOIN sys_user_role ur ON u.user_id = ur.user_id
+            LEFT JOIN sys_role r ON ur.role_id = r.role_id
+        WHERE ur.user_id = #{userId}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from sys_role
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </delete>
+
+    <delete id="delBatch">
+        delete from sys_role
+        where role_id in (
+        <foreach collection="list" item="roleIds" separator=",">
+            #{roleIds}
+        </foreach>)
+    </delete>
+
+    <insert id="insert" parameterType="com.jtsec.manager.pojo.model.Role" keyProperty="roleId" useGeneratedKeys="true">
+        insert into sys_role (role_id, role_name, role_key,
+                              role_sort, status, create_by,
+                              create_time, update_by, update_time,
+                              remark)
+        values (#{roleId,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, #{roleKey,jdbcType=VARCHAR},
+                #{roleSort,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR},
+                now(), #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+                #{remark,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.jtsec.manager.pojo.model.Role">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                role_id,
+            </if>
+            <if test="roleName != null">
+                role_name,
+            </if>
+            <if test="roleKey != null">
+                role_key,
+            </if>
+            <if test="roleSort != null">
+                role_sort,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">
+                #{roleId,jdbcType=INTEGER},
+            </if>
+            <if test="roleName != null">
+                #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleKey != null">
+                #{roleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="roleSort != null">
+                #{roleSort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.manager.pojo.model.Role">
+        update sys_role
+        <set>
+            <if test="roleName != null">
+                role_name = #{roleName,jdbcType=VARCHAR},
+            </if>
+            <if test="roleKey != null">
+                role_key = #{roleKey,jdbcType=VARCHAR},
+            </if>
+            <if test="roleSort != null">
+                role_sort = #{roleSort,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = now(),
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.manager.pojo.model.Role">
+        update sys_role
+        set role_name   = #{roleName,jdbcType=VARCHAR},
+            role_key    = #{roleKey,jdbcType=VARCHAR},
+            role_sort   = #{roleSort,jdbcType=INTEGER},
+            status      = #{status,jdbcType=INTEGER},
+            create_by   = #{createBy,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_by   = #{updateBy,jdbcType=VARCHAR},
+            update_time = now(),
+            remark      = #{remark,jdbcType=VARCHAR}
+        where role_id = #{roleId,jdbcType=INTEGER}
+    </update>
+
+</mapper>

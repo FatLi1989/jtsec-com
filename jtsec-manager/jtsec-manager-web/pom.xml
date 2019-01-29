@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>manager-web</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>manager-web</name>
+    <description>The Manager-Web</description>
+
+    <parent>
+        <groupId>com.jtsec</groupId>
+        <artifactId>manager</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <!-- 依赖模块 -->
+    <dependencies>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-service</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>mc-log-analysis-pojo</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>mc-log-analysis-api</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-service-impl</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>common</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-pojo</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-shiro</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <!-- 定时任务 -->
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-scheduler</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-mapper</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <!-- 外部引用模块 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <!-- 阿里连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- 不喜欢tomcat -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jetty</artifactId>
+        </dependency>
+        <!-- 测试用 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!-- springboot 热部署 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+            <scope>compile</scope>
+        </dependency>
+        <!-- dubbo -->
+        <dependency>
+            <groupId>com.alibaba.spring.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+        </dependency>
+        <!-- zookeeper 客户端 -->
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.20.0-GA</version>
+        </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.10.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>domain.ManagerWebApplication</mainClass>
+                    <fork>true</fork>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal><!--可以把依赖的包都打包到生成的Jar包中-->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>jtsec-manager</finalName>
+    </build>
+</project>

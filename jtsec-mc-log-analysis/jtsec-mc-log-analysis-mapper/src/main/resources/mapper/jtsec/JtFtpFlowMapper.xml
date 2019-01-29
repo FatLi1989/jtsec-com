@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.mc.log.jtsec.mapper.JtFtpFlowMapper">
+    <resultMap id="BaseResultMap" type="com.jtsec.mc.log.analysis.pojo.model.JtFtpFlow">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="from_ip" jdbcType="VARCHAR" property="fromIp"/>
+        <result column="serv_name" jdbcType="VARCHAR" property="servName"/>
+        <result column="cli_ip" jdbcType="VARCHAR" property="cliIp"/>
+        <result column="cli_port" jdbcType="VARCHAR" property="cliPort"/>
+        <result column="direction" jdbcType="CHAR" property="direction"/>
+        <result column="file_name" jdbcType="VARCHAR" property="fileName"/>
+        <result column="file_type" jdbcType="VARCHAR" property="fileType"/>
+        <result column="file_path" jdbcType="VARCHAR" property="filePath"/>
+        <result column="file_size" jdbcType="INTEGER" property="fileSize"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, time, from_ip, serv_name, cli_ip, cli_port, direction, file_name, file_type,
+        file_path, file_size
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jt_ftp_flow
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from jt_ftp_flow
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtFtpFlowDay">
+        insert into jt_ftp_flow (id, time, from_ip,
+                                 serv_name, cli_ip, cli_port,
+                                 direction, file_name, file_type,
+                                 file_path, file_size)
+        values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{fromIp,jdbcType=VARCHAR},
+            #{servName,jdbcType=VARCHAR}, #{cliIp,jdbcType=VARCHAR}, #{cliPort,jdbcType=VARCHAR},
+            #{direction,jdbcType=CHAR}, #{fileName,jdbcType=VARCHAR}, #{fileType,jdbcType=VARCHAR},
+            #{filePath,jdbcType=VARCHAR}, #{fileSize,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtFtpFlowDay">
+        insert into jt_ftp_flow
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="fromIp != null">
+                from_ip,
+            </if>
+            <if test="servName != null">
+                serv_name,
+            </if>
+            <if test="cliIp != null">
+                cli_ip,
+            </if>
+            <if test="cliPort != null">
+                cli_port,
+            </if>
+            <if test="direction != null">
+                direction,
+            </if>
+            <if test="fileName != null">
+                file_name,
+            </if>
+            <if test="fileType != null">
+                file_type,
+            </if>
+            <if test="filePath != null">
+                file_path,
+            </if>
+            <if test="fileSize != null">
+                file_size,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fromIp != null">
+                #{fromIp,jdbcType=VARCHAR},
+            </if>
+            <if test="servName != null">
+                #{servName,jdbcType=VARCHAR},
+            </if>
+            <if test="cliIp != null">
+                #{cliIp,jdbcType=VARCHAR},
+            </if>
+            <if test="cliPort != null">
+                #{cliPort,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=CHAR},
+            </if>
+            <if test="fileName != null">
+                #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                #{fileSize,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtFtpFlowDay">
+        update jt_ftp_flow
+        <set>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="fromIp != null">
+                from_ip = #{fromIp,jdbcType=VARCHAR},
+            </if>
+            <if test="servName != null">
+                serv_name = #{servName,jdbcType=VARCHAR},
+            </if>
+            <if test="cliIp != null">
+                cli_ip = #{cliIp,jdbcType=VARCHAR},
+            </if>
+            <if test="cliPort != null">
+                cli_port = #{cliPort,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                direction = #{direction,jdbcType=CHAR},
+            </if>
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileType != null">
+                file_type = #{fileType,jdbcType=VARCHAR},
+            </if>
+            <if test="filePath != null">
+                file_path = #{filePath,jdbcType=VARCHAR},
+            </if>
+            <if test="fileSize != null">
+                file_size = #{fileSize,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtFtpFlowDay">
+        update jt_ftp_flow
+        set time      = #{time,jdbcType=TIMESTAMP},
+            from_ip   = #{fromIp,jdbcType=VARCHAR},
+            serv_name = #{servName,jdbcType=VARCHAR},
+            cli_ip    = #{cliIp,jdbcType=VARCHAR},
+            cli_port  = #{cliPort,jdbcType=VARCHAR},
+            direction = #{direction,jdbcType=CHAR},
+            file_name = #{fileName,jdbcType=VARCHAR},
+            file_type = #{fileType,jdbcType=VARCHAR},
+            file_path = #{filePath,jdbcType=VARCHAR},
+            file_size = #{fileSize,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

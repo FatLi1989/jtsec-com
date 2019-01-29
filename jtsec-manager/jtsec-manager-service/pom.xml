@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.jtsec</groupId>
+    <artifactId>manager-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>manager-service</name>
+    <description>The Jtsec Manager Scheduler</description>
+
+    <parent>
+        <groupId>com.jtsec</groupId>
+        <artifactId>manager</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>common</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jtsec</groupId>
+            <artifactId>manager-pojo</artifactId>
+            <version>${our-project-version}</version>
+        </dependency>
+        <!-- 外部依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+    </dependencies>
+</project>

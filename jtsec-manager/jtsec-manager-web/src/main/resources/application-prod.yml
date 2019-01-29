@@ -1,0 +1,5 @@
+#端口号及访问路径
+server:
+  port: ${random.int(10000)}
+  servlet:
+    context-path: /jtsec

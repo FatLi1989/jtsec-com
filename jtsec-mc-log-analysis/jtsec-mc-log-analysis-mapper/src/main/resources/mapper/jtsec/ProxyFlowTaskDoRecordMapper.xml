@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.mc.log.jtsec.mapper.ProxyFlowTaskDoRecordMapper">
+    <resultMap id="BaseResultMap" type="com.jtsec.mc.log.analysis.pojo.model.ProxyFlowTaskDoRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="serv_protocol" jdbcType="VARCHAR" property="servProtocol"/>
+        <result column="record_type" jdbcType="VARCHAR" property="recordType"/>
+        <result column="direction" jdbcType="VARCHAR" property="direction"/>
+        <result column="count_time" jdbcType="TIMESTAMP" property="countTime"/>
+        <result column="exist_data" jdbcType="VARCHAR" property="existData"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, serv_protocol, record_type, direction, count_time, exist_data
+    </sql>
+
+    <sql id="selectColumn">
+        pf.id as id,
+        pf.count_time as count_time,
+        pf.direction as direction,
+        pf.exist_data as exist_data,
+        pf.record_type as record_type,
+        pf.serv_protocol as serv_protocol
+    </sql>
+
+
+    <sql id="ProxyFlowTaskDoRecordCondition">
+        <where>
+            <if test="map.recordType != null and map.recordType != ''">
+                and pf.record_type = #{map.recordType}
+            </if>
+            <if test="map.direction != null and map.direction != ''">
+                and pf.direction = #{map.direction}
+            </if>
+            <if test="map.servProtocol != null and map.servProtocol != ''">
+                and pf.serv_protocol = #{map.servProtocol}
+            </if>
+            <if test="map.existData != null and map.existData != ''">
+                and pf.exist_data = #{map.existData}
+            </if>
+            <if test="map.countTime != null and map.countTime != ''">
+                and pf.count_time = #{map.countTime}
+            </if>
+            <if test="map.startTime != null and map.startTime != ''">
+                and pf.count_time &gt;= #{map.startTime}
+            </if>
+            <if test="map.endTime != null and map.endTime != ''">
+                and pf.count_time &lt;= #{map.endTime}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from proxy_flow_task_do_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="queryLastRecordByVarible" resultMap="BaseResultMap">
+        select
+        <include refid="selectColumn"/>
+        from proxy_flow_task_do_record pf
+        <include refid="ProxyFlowTaskDoRecordCondition"/>
+        order by pf.count_time DESC
+        limit 1
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+        select count(1)
+        from proxy_flow_task_do_record
+        <include refid="ProxyFlowTaskDoRecordCondition"/>
+    </select>
+
+    <select id="queryRecordByVarible" resultMap="BaseResultMap">
+        select
+        <include refid="selectColumn"/>
+        from proxy_flow_task_do_record pf
+        <include refid="ProxyFlowTaskDoRecordCondition"/>
+    </select>
+
+    <select id="queryRecordsByVarible" resultMap="BaseResultMap">
+        select
+        <include refid="selectColumn"/>
+        from proxy_flow_task_do_record pf
+        <include refid="ProxyFlowTaskDoRecordCondition"/>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from proxy_flow_task_do_record
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.jtsec.mc.log.analysis.pojo.model.ProxyFlowTaskDoRecord">
+        insert into proxy_flow_task_do_record (id, serv_protocol, record_type,
+                                               direction, count_time, exist_data
+        )
+        values (#{id,jdbcType=INTEGER}, #{servProtocol,jdbcType=VARCHAR}, #{recordType,jdbcType=VARCHAR},
+                #{direction,jdbcType=VARCHAR}, #{countTime,jdbcType=TIMESTAMP}, #{existData,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.ProxyFlowTaskDoRecord">
+        insert into proxy_flow_task_do_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="servProtocol != null">
+                serv_protocol,
+            </if>
+            <if test="recordType != null">
+                record_type,
+            </if>
+            <if test="direction != null">
+                direction,
+            </if>
+            <if test="countTime != null">
+                count_time,
+            </if>
+            <if test="existData != null">
+                exist_data,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="servProtocol != null">
+                #{servProtocol,jdbcType=VARCHAR},
+            </if>
+            <if test="recordType != null">
+                #{recordType,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="countTime != null">
+                #{countTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="existData != null">
+                #{existData,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertRecord" parameterType="com.jtsec.mc.log.analysis.pojo.model.ProxyFlowTaskDoRecord"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into proxy_flow_task_do_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="servProtocol != null">
+                serv_protocol,
+            </if>
+            <if test="recordType != null">
+                record_type,
+            </if>
+            <if test="direction != null">
+                direction,
+            </if>
+            <if test="countTime != null">
+                count_time,
+            </if>
+            <if test="existData != null">
+                exist_data,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="servProtocol != null">
+                #{servProtocol,jdbcType=VARCHAR},
+            </if>
+            <if test="recordType != null">
+                #{recordType,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="countTime != null">
+                #{countTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="existData != null">
+                #{existData,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.ProxyFlowTaskDoRecord">
+        update proxy_flow_task_do_record
+        <set>
+            <if test="servProtocol != null">
+                serv_protocol = #{servProtocol,jdbcType=VARCHAR},
+            </if>
+            <if test="recordType != null">
+                record_type = #{recordType,jdbcType=VARCHAR},
+            </if>
+            <if test="direction != null">
+                direction = #{direction,jdbcType=VARCHAR},
+            </if>
+            <if test="startTime != null">
+                count_time = #{startTime},
+            </if>
+            <if test="existData != null">
+                exist_data = #{existData,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.mc.log.analysis.pojo.model.ProxyFlowTaskDoRecord">
+        update proxy_flow_task_do_record
+        set serv_protocol = #{servProtocol,jdbcType=VARCHAR},
+            record_type   = #{recordType,jdbcType=VARCHAR},
+            direction     = #{direction,jdbcType=VARCHAR},
+            count_time    = #{countTime,jdbcType=TIMESTAMP},
+            exist_data    = #{existData,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

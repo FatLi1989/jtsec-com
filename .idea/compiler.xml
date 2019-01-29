@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <option name="USE_RELEASE_OPTION" value="false" />
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/jtsec-manager/jtsec-manager-web/src/main/java/com/jtsec/manager/controller/SimpleProducer.java" />
+    </excludeFromCompile>
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jtsec-common" />
+        <module name="jtsec-connom" />
+        <module name="jtsec-manager-mapper" />
+        <module name="jtsec-manager-pojo" />
+        <module name="jtsec-manager-scheduler" />
+        <module name="jtsec-manager-service" />
+        <module name="jtsec-manager-service-impl" />
+        <module name="jtsec-manager-shiro" />
+        <module name="jtsec-manager-web" />
+        <module name="jtsec-mc-dev-moitor-api" />
+        <module name="jtsec-mc-dev-moitor-mapper" />
+        <module name="jtsec-mc-dev-moitor-pojo" />
+        <module name="jtsec-mc-dev-moitor-service" />
+        <module name="jtsec-mc-dev-moitor-service-impl" />
+        <module name="jtsec-mc-log-analysis-api" />
+        <module name="jtsec-mc-log-analysis-mapper" />
+        <module name="jtsec-mc-log-analysis-pojo" />
+        <module name="jtsec-mc-log-analysis-scheduler" />
+        <module name="jtsec-mc-log-analysis-service-impl" />
+        <module name="jtsec-mc-log-analysis-service-scheduler" />
+        <module name="jtsec-mc-log-parser-api" />
+        <module name="jtsec-mc-log-parser-mapper" />
+        <module name="jtsec-mc-log-parser-pojo" />
+        <module name="jtsec-mc-log-parser-service" />
+        <module name="jtsec-mc-log-parser-service-impl" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="8">
+      <module name="common" target="1.8" />
+      <module name="jtsec" target="1.8" />
+      <module name="jtsec-common" target="1.8" />
+      <module name="jtsec-manager" target="1.8" />
+      <module name="jtsec-manager-mapper" target="1.8" />
+      <module name="jtsec-manager-pojo" target="1.8" />
+      <module name="jtsec-manager-scheduler" target="1.8" />
+      <module name="jtsec-manager-service" target="1.8" />
+      <module name="jtsec-manager-service-impl" target="1.8" />
+      <module name="jtsec-manager-shiro" target="1.8" />
+      <module name="jtsec-manager-web" target="1.8" />
+      <module name="jtsec-mc-dev-moitor" target="1.8" />
+      <module name="jtsec-mc-dev-moitor-api" target="1.8" />
+      <module name="jtsec-mc-dev-moitor-mapper" target="1.8" />
+      <module name="jtsec-mc-dev-moitor-pojo" target="1.8" />
+      <module name="jtsec-mc-dev-moitor-service" target="1.8" />
+      <module name="jtsec-mc-dev-moitor-service-impl" target="1.8" />
+      <module name="jtsec-mc-dev-pojo" target="1.8" />
+      <module name="jtsec-mc-log-analysis" target="1.8" />
+      <module name="jtsec-mc-log-analysis-api" target="1.8" />
+      <module name="jtsec-mc-log-analysis-mapper" target="1.8" />
+      <module name="jtsec-mc-log-analysis-pojo" target="1.8" />
+      <module name="jtsec-mc-log-analysis-scheduler" target="1.8" />
+      <module name="jtsec-mc-log-analysis-service-impl" target="1.8" />
+      <module name="jtsec-mc-log-analysis-service-scheduler" target="1.8" />
+      <module name="jtsec-mc-log-analysis-web" target="1.8" />
+      <module name="jtsec-mc-log-parser" target="1.8" />
+      <module name="jtsec-mc-log-parser-api" target="1.8" />
+      <module name="jtsec-mc-log-parser-mapper" target="1.8" />
+      <module name="jtsec-mc-log-parser-pojo" target="1.8" />
+      <module name="jtsec-mc-log-parser-service" target="1.8" />
+      <module name="jtsec-mc-log-parser-service-impl" target="1.8" />
+      <module name="mc-dev-moitor" target="1.8" />
+      <module name="mc-dev-moitor-api" target="1.8" />
+      <module name="mc-dev-moitor-mapper" target="1.8" />
+      <module name="mc-dev-moitor-pojo" target="1.8" />
+      <module name="mc-dev-moitor-service-impl" target="1.8" />
+      <module name="mc-log-analysis-api" target="1.8" />
+      <module name="mc-log-analysis-mapper" target="1.8" />
+      <module name="mc-log-analysis-pojo" target="1.8" />
+      <module name="mc-log-analysis-scheduler" target="1.8" />
+      <module name="mc-log-analysis-service-impl" target="1.8" />
+      <module name="mc-log-parser" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

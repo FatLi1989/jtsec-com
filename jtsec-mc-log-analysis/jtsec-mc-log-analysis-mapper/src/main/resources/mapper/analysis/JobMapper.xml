@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.mc.log.analysis.mapper.JobMapper">
+    <resultMap id="BaseResultMap" type="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob">
+        <id column="job_id" jdbcType="INTEGER" property="jobId"/>
+        <id column="job_name" jdbcType="VARCHAR" property="jobName"/>
+        <id column="job_group" jdbcType="VARCHAR" property="jobGroup"/>
+        <result column="method_name" jdbcType="VARCHAR" property="methodName"/>
+        <result column="params" jdbcType="VARCHAR" property="params"/>
+        <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="create_by" jdbcType="VARCHAR" property="createBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_by" jdbcType="VARCHAR" property="updateBy"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        job_id, job_name, job_group, method_name, params, cron_expression, status, create_by,
+        create_time, update_by, update_time, remark
+    </sql>
+
+    <sql id="jobCondition">
+        <where>
+            <if test="map.jobName != null and map.jobName != ''">
+                and sj.job_name like CONCAT ("%",#{map.jobName},"%")
+            </if>
+            <if test="map.methodName != null and map.methodName != ''">
+                and sj.method_name like CONCAT ("%",#{map.methodName},"%")
+            </if>
+            <if test="map.status != null and map.status != ''">
+                and sj.status = #{map.status}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_job
+        where job_id = #{jobId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectJobByVarible" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_job sj
+        <include refid="jobCondition"></include>
+        order by sj.status
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob">
+        delete from sys_job
+        where job_id = #{jobId,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob" keyProperty="jobId" useGeneratedKeys="true">
+        insert into sys_job (job_id, job_name, job_group,
+                             method_name, params, cron_expression,
+                             status, create_by, create_time,
+                             update_by, update_time, remark
+        )
+        values (#{jobId,jdbcType=INTEGER}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=VARCHAR},
+                                           #{methodName,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR},
+                                           #{cronExpression,jdbcType=VARCHAR},
+                                           #{status,jdbcType=INTEGER}, #{createBy,jdbcType=VARCHAR},
+                                           now(),
+                                           #{updateBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP},
+                #{remark,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob">
+        insert into sys_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobId != null">
+                job_id,
+            </if>
+            <if test="jobName != null">
+                job_name,
+            </if>
+            <if test="jobGroup != null">
+                job_group,
+            </if>
+            <if test="methodName != null">
+                method_name,
+            </if>
+            <if test="params != null">
+                params,
+            </if>
+            <if test="cronExpression != null">
+                cron_expression,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createBy != null">
+                create_by,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateBy != null">
+                update_by,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobId != null">
+                #{jobId,jdbcType=INTEGER},
+            </if>
+            <if test="jobName != null">
+                #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                #{jobGroup,jdbcType=VARCHAR},
+            </if>
+            <if test="methodName != null">
+                #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                #{params,jdbcType=VARCHAR},
+            </if>
+            <if test="cronExpression != null">
+                #{cronExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null">
+                #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob">
+        update sys_job
+        <set>
+            <if test="methodName != null">
+                method_name = #{methodName,jdbcType=VARCHAR},
+            </if>
+            <if test="params != null">
+                params = #{params,jdbcType=VARCHAR},
+            </if>
+            <if test="cronExpression != null">
+                cron_expression = #{cronExpression,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where job_id = #{jobId,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.mc.log.analysis.pojo.model.AnalysisJob">
+        update sys_job
+        set method_name     = #{methodName,jdbcType=VARCHAR},
+            params          = #{params,jdbcType=VARCHAR},
+            cron_expression = #{cronExpression,jdbcType=VARCHAR},
+            status          = #{status,jdbcType=INTEGER},
+            update_by       = #{updateBy,jdbcType=VARCHAR},
+            update_time     = now(),
+            remark          = #{remark,jdbcType=VARCHAR}
+        where job_id = #{jobId,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delBatch">
+        delete from sys_job
+        where job_id in (
+        <foreach collection="list" item="jodId" separator=",">
+            #{jodId}
+        </foreach>)
+    </delete>
+
+</mapper>

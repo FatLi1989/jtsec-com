@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/jtsec-manager/manager-web" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-analysis/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-manager/jtsec-manager-web/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-api/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-mapper/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-service/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-service-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-parser/jtsec-mc-log-parser-api/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-parser/jtsec-mc-log-parser-mapper/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-parser/jtsec-mc-log-parser-pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-parser/jtsec-mc-log-parser-service/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-parser/jtsec-mc-log-parser-service-impl/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-log-parser/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/jtsec-manager/jtsec-manager-web/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-manager/jtsec-managerpojo/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-manager/manager-web/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-manager/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-api/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-pojo/pom.xml" />
+        <option value="$PROJECT_DIR$/jtsec-mc-dev-moitor/jtsec-mc-dev-moitor-service/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$" />
+  </component>
+</project>

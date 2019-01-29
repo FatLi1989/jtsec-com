@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jtsec.mc.log.jtsec.mapper.JtSftsFlowMinMapper">
+    <resultMap id="BaseResultMap" type="com.jtsec.mc.log.analysis.pojo.model.JtSftsFlowMin">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="serv_ip" jdbcType="VARCHAR" property="servIp"/>
+        <result column="serv_name" jdbcType="VARCHAR" property="servName"/>
+        <result column="file_count" jdbcType="INTEGER" property="fileCount"/>
+        <result column="direction" jdbcType="CHAR" property="direction"/>
+        <result column="flow_size" jdbcType="BIGINT" property="flowSize"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, time, serv_ip, serv_name, file_count, direction, flow_size
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from jt_sfts_flow_min
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="statisticsFlowMinToHourGroupByServName" resultMap="BaseResultMap">
+        SELECT
+        js.serv_ip as serv_ip,
+        js.serv_name as serv_name,
+        js.direction AS direction,
+        sum(js.file_count) AS file_count,
+        sum(js.flow_size) AS flow_size
+        FROM
+        jt_sfts_flow_min js
+        <include refid="condition"/>
+        GROUP BY
+        js.serv_name
+    </select>
+
+    <sql id="condition">
+        <where>
+            <if test="map.direction != null and map.direction != ''">
+                and js.direction = #{map.direction}
+            </if>
+            <if test="map.startTime != null and map.startTime != ''">
+                and js.time &gt;= #{map.startTime}
+            </if>
+            <if test="map.endTime != null and map.endTime != ''">
+                and js.time &lt;= #{map.endTime}
+            </if>
+        </where>
+    </sql>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from jt_sfts_flow_min
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtSftsFlowMin">
+        insert into jt_sfts_flow_min (id, time, serv_ip,
+                                      serv_name, file_count, direction,
+                                      flow_size)
+        values (#{id,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{servIp,jdbcType=VARCHAR},
+                #{servName,jdbcType=VARCHAR}, #{fileCount,jdbcType=INTEGER}, #{direction,jdbcType=CHAR},
+                #{flowSize,jdbcType=BIGINT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtSftsFlowMin">
+        insert into jt_sfts_flow_min
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="servIp != null">
+                serv_ip,
+            </if>
+            <if test="servName != null">
+                serv_name,
+            </if>
+            <if test="fileCount != null">
+                file_count,
+            </if>
+            <if test="direction != null">
+                direction,
+            </if>
+            <if test="flowSize != null">
+                flow_size,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="servIp != null">
+                #{servIp,jdbcType=VARCHAR},
+            </if>
+            <if test="servName != null">
+                #{servName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileCount != null">
+                #{fileCount,jdbcType=INTEGER},
+            </if>
+            <if test="direction != null">
+                #{direction,jdbcType=CHAR},
+            </if>
+            <if test="flowSize != null">
+                #{flowSize,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtSftsFlowMin">
+        update jt_sfts_flow_min
+        <set>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="servIp != null">
+                serv_ip = #{servIp,jdbcType=VARCHAR},
+            </if>
+            <if test="servName != null">
+                serv_name = #{servName,jdbcType=VARCHAR},
+            </if>
+            <if test="fileCount != null">
+                file_count = #{fileCount,jdbcType=INTEGER},
+            </if>
+            <if test="direction != null">
+                direction = #{direction,jdbcType=CHAR},
+            </if>
+            <if test="flowSize != null">
+                flow_size = #{flowSize,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.jtsec.mc.log.analysis.pojo.model.JtSftsFlowMin">
+        update jt_sfts_flow_min
+        set time       = #{time,jdbcType=TIMESTAMP},
+            serv_ip    = #{servIp,jdbcType=VARCHAR},
+            serv_name  = #{servName,jdbcType=VARCHAR},
+            file_count = #{fileCount,jdbcType=INTEGER},
+            direction  = #{direction,jdbcType=CHAR},
+            flow_size  = #{flowSize,jdbcType=BIGINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

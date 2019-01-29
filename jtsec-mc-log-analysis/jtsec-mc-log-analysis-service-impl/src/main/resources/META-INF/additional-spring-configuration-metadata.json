@@ -1,0 +1,18 @@
+{
+  "properties": [
+    {
+      "name": "spring.dubbo",
+      "type": "java.lang.String",
+      "description": "Description for spring.dubbo."
+    },
+    {
+      "name": "spring.dubbo.server",
+      "type": "java.lang.String",
+      "description": "Description for spring.dubbo.server."
+    },
+    {
+      "name": "dubbo",
+      "type": "java.lang.String",
+      "description": "Description for dubbo."
+    }
+  ] }
